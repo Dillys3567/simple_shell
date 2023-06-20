@@ -65,7 +65,7 @@ char *fetch_alias(data_of_programs *data, char *name)
  * @data: struct for program data
  * Return: o on success, other if declared
  */
-int write_alias(char *string_alias, data_of_programs *data)
+int write_alias(char *string_alias, data_of_program *data)
 {
 	int x, y;
 	char buff[250] = {'0'}, *temporary = NULL;
