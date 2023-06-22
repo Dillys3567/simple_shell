@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _print - writes a array of chars in the standard output
+ * _print - writes an array of chars in the standard output
  * @string: pointer to the array of chars
  * Return: the number of bytes written or
  * on error, -1 is returned, and errno is set appropriately.
@@ -13,7 +13,7 @@ int _print(char *string)
 
 
 /**
- * _printe - writes a array of chars in the standard error
+ * _printe - writes an array of chars in the standard error
  * @string: pointer to the array of chars
  * Return: the number of bytes written or
  * on error, -1 is returned, and errno is set appropriately.
@@ -24,7 +24,7 @@ int _printe(char *string)
 }
 
 /**
- * _print_error - writes a array of chars in the standart error
+ * _print_error - writes an array of chars in the standard error
  * @data: a pointer to the program's data'
  * @errorcode: error code to print
  * Return: the number of bytes written or

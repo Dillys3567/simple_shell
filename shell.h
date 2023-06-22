@@ -38,6 +38,17 @@ typedef struct info
 	char **alias_list;
 } data_of_program;
 
+/**
+ * struct builtins - struct for the builtins
+ * @builtin: the name of the builtin
+ * @function: the associated function to be called for each builtin
+ */
+typedef struct builtins
+{
+	char *builtin;
+	int (*function)(data_of_program *data);
+} builtins;
+
              /*To add, remove or show aliases*/
 int output_alias(data_of_programs *data, char *alias);
 
