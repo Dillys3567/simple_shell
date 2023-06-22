@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stddef.h>
 #include <errno.h> 
+#include <string.h>
 #include <sys/types.h> 
 #include <sys/wait.h>
 #include <sys/stat.h>
@@ -50,44 +51,44 @@ typedef struct builtins
 } builtins;
 
              /*To add, remove or show aliases*/
-int output_alias(data_of_programs *data, char *alias);
+int output_alias(data_of_program *data, char *alias);
 
                   /*To get the alias*/
-char *fetch_alias(data_of_programs *data, char *name);
+char *fetch_alias(data_of_program *data, char *name);
 
                   /*To add alias*/
-int write_alias(char *string_alias, data_of_programs *data);
+int write_alias(char *string_alias, data_of_program *data);
 
        /*To allow to read a line from command prompt*/
-int _getlines(data_of programs * data);
+int _getlines(data_of_program * data);
 
    /*To check for logical operators and split*/
 int check_ops_logic(char *array_of_commands[], int x,
 		char array_of_operators[]);
 
     /*exit program with status*/
-int exit_builtin(data_of_programs *data);
+int exit_builtin(data_of_program *data);
 
    /*change working dir*/
-int cd_builtin(data_of_programs *data);
+int cd_builtin(data_of_program *data);
 
       /*set working dir*/
-int set_working_directory(data_of_programs *data, char *new_dir);
+int set_working_directory(data_of_program *data, char *new_dir);
 
       /*show environment of shell*/
-int help_builtin(data_of_programs *data);
+int help_builtin(data_of_program *data);
 
        /*aliases*/
 int alias_builtin(data_of_program *data);
 
     /*search and execute builtins match*/
-int list_of_builtins(data_of_programs *data);
+int list_of_builtins(data_of_program *data);
 
     /*show shell environment*/
-int builtin_environment(data_of_programs *data);
+int builtin_environment(data_of_program *data);
 
         /*set env*/
-int builtin_set_environment(data_of_programs *data);
+int builtin_set_environment(data_of_program *data);
 
        /*unset env*/
 int builtin_unset_environment(data_of_program *data);
@@ -102,13 +103,13 @@ void free_all_data(data_of_program *data);
 void free_recurrent_data(data_of_program *data);
 
      /*To execute command*/
-int execution(data_of_programs *data);
+int execution(data_of_program *data);
 
     /*To expand variables*/
-void variables_expansion(data_of_programs *data);
+void variables_expansion(data_of_program *data);
 
     /*To expand alias*/
-void alias_expansion(data_of_programs *data);
+void alias_expansion(data_of_program *data);
 
     /*To append to buffer*/
 int add_to_buffer(char *buffer, char *strings);
@@ -117,10 +118,10 @@ int add_to_buffer(char *buffer, char *strings);
 int check_files(char *file_path);
 
     /*To find program*/
-int finding_program(data_of_programs *data);
+int finding_program(data_of_program *data);
 
     /*To tokenize*/
-char **tokenize_paths(data_of_programs *data);
+char **tokenize_paths(data_of_program *data);
 
     /*To converts a number to a string type*/
 void long_to_string(long number, char *string, int base);
