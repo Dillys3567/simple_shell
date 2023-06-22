@@ -101,4 +101,73 @@ void free_all_data(data_of_program *data);
      /*To free the fields needed for each loop of a program*/
 void free_recurrent_data(data_of_program *data);
 
+     /*To execute command*/
+int execution(data_of_programs *data);
+
+    /*To expand variables*/
+void variables_expansion(data_of_programs *data);
+
+    /*To expand alias*/
+void alias_expansion(data_of_programs *data);
+
+    /*To append to buffer*/
+int add_to_buffer(char *buffer, char *strings);
+
+    /*To check if file exists*/
+int check_files(char *file_path);
+
+    /*To find program*/
+int finding_program(data_of_programs *data);
+
+    /*To tokenize*/
+char **tokenize_paths(data_of_programs *data);
+
+    /*To converts a number to a string type*/
+void long_to_string(long number, char *string, int base);
+
+    /*To convert a string of digits to an integer*/
+int _atoi(char *s);
+
+    /*To count the coincidences of character in string*/
+int count_characters(char *string, char *character);
+
+    /*To write an array of chars in the standard error*/
+int _print_error(int errorcode, data_of_program *data);
+
+    /*To write an array of chars in the standard error*/
+int _printe(char *string);
+
+     /*To write an array of chars in the standard output*/
+int _print(char *string);
+
+     /*To return the length of a null terminated string*/
+int str_length(char *str);
+
+     /*To duplicate a string*/
+char *str_duplicate(char *str);
+
+      /*To Compare two strings*/
+int str_compare(char *str1, char *str2, int number);
+
+      /*To concatenates two strings*/
+char *str_concat(char *str1, char *str2);
+
+     /*To reverse a string*/
+void str_reverse(char *str);
+
+      /*To initialize the variables of the program*/
+int main(int argc, char *argv[], char *env[]);
+
+     /*To print the prompt in a new line when the signal SIGINT*/
+void handle_ctrl_c(int opr UNUSED);
+
+       /*To inicialize the struct with the info of the program*/
+void inicialize_data(data_of_program *data, int argc, char *argv[], char **env);
+
+      /*An infinite loop that shows the prompt*/
+void sisifo(char *prompt, data_of_program *data);
+
+     /*To separate strings with delimiters*/
+char *_strtok(char *line, char *delim);
+
 #endif /* SHELL_H */
