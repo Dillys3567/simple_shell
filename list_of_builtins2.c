@@ -100,7 +100,7 @@ int help_builtin(data_of_program *data)
 	if (data->tokens[2] != NULL)
 	{
 		errNo = E2BIG;
-		print_error(data->commands_name);
+		print_error(data->command_name);
 		return (5);
 	}
 	messages[1] = HELP_EXIT_MESSAGE;
@@ -119,7 +119,7 @@ int help_builtin(data_of_program *data)
 		}
 	}
 	errNo = EINVAL;
-	print_error(data->commands_name);
+	print_error(data->command_name);
 	return (0);
 }
 /**

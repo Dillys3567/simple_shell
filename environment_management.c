@@ -9,15 +9,15 @@ char *environment_get_key(char *key, data_of_program *data)
 {
 	int x, length_of_key = 0;
 
-	if (key == NULL || data->environment == NULL)
+	if (key == NULL || data->env == NULL)
 		return (NULL);
 	length_of_key = string_length(key);
-	for (x = 0; data->environment[x]; x++)
+	for (x = 0; data->env[x]; x++)
 	{
-		if (string_compare(key, data->environment[x], length_of_key) && data->
-				environment[x][length_of_key] == '=')
+		if (string_compare(key, data->env[x], length_of_key) && data->
+				env[x][length_of_key] == '=')
 		{
-			return (data->environment[x] + length_of_key + 1);
+			return (data->env[x] + length_of_key + 1);
 		}
 	}
 	return (NULL);
@@ -33,26 +33,26 @@ int environment_set_key(char *key, char *value, data_of_program *data)
 {
 	int x, length_of_key = 0, new_key = 1;
 
-	if (key == NULL || value == NULL || data->environment == NULL)
+	if (key == NULL || value == NULL || data->env == NULL)
 		return (1);
 	length_of_key = string_length(key);
 
-	for (x = 0; data->environment[x]; x++)
+	for (x = 0; data->env[x]; x++)
 	{
-		if (string_compare(key, data->environment[x], length_of_key) && data->
+		if (string_compare(key, data->env[x], length_of_key) && data->
 				env[x][length_of_key] == '=')
 		{
 			new_key = 0;
-			free(data->environment[x]);
+			free(data->env[x]);
 			break;
 		}
 	}
-	data->environment[x] = string_concatenate(duplicate_string(key), '=');
-	data->environment[x] = string_concatenate(data->environment[x], value);
+	data->env[x] = string_concatenate(duplicate_string(key), '=');
+	data->env[x] = string_concatenate(data->env[x], value);
 
 	if (new_key)
 	{
-		data->environment[x + 1] = NULL;
+		data->env[x + 1] = NULL;
 	}
 	return (0);
 }
@@ -66,22 +66,22 @@ int environment_remove_key(char *key, data_of_program *data)
 {
 	int x, length_of_key = 0;
 
-	if (key == NULL || data->environment == NULL)
+	if (key == NULL || data->env == NULL)
 		return  (0);
 	length_of_key = string_length(key);
 
-	for (x = 0; data->environment[x]; x++)
+	for (x = 0; data->env[x]; x++)
 	{
-		if (string_compare(key, data->environment[x], length_of_key) && data
-				->environment[x][length_of_key] == '=')
+		if (string_compare(key, data->env[x], length_of_key) && data
+				->env[x][length_of_key] == '=')
 		{
-			free(data->environment[x]);
+			free(data->env[x]);
 			x++;
-			for (; data->environment[x]; x++)
+			for (; data->env[x]; x++)
 			{
-				data->environment[x - 1] = data->environment[x];
+				data->env[x - 1] = data->env[x];
 			}
-			data->environment[x - 1] == NULL;
+			data->env[x - 1] == NULL;
 			return (1);
 		}
 	}
@@ -95,9 +95,9 @@ void print_environment(data_of_program *data)
 {
 	int y;
 
-	for (y = 0; data->environemnt[y]; y++)
+	for (y = 0; data->env[y]; y++)
 	{
-		_print(data->environment[y]);
+		_print(data->env[y]);
 		_print("\n");
 	}
 }

@@ -10,24 +10,24 @@ int output_alias(data_of_program *data, char *alias)
 	int x, y, length_of_alias;
 	char buff[250] - {'\0'};
 
-	if (data->list_aliases)
+	if (data->alias_list)
 	{
 		length_of_alias = string_length(alias);
-		for (x = 0; data->list_aliases[x]; x++)
+		for (x = 0; data->alias_list[x]; x++)
 		{
-			if (!alias || (string_compare(data->list_aliases[x]
-				, alias, length_of_alias) && data->list_of_aliases
+			if (!alias || (string_compare(data->alias_list[x]
+				, alias, length_of_alias) && data->alias_list
 						[x][length_of_alias] == '='))
 			{
-				for (y = 0; data->list_of_aliases[x][y]; y++)
+				for (y = 0; data->alias_list[x][y]; y++)
 				{
-					buff[y] = data->list_of_aliases[x][y];
-					if (data->list_of_aliases[x][y] == '=')
+					buff[y] = data->alias_list[x][y];
+					if (data->alias_list[x][y] == '=')
 						break;
 				}
 				buff[y + 1] = '\0';
 				add_to_buffer(buff, "'");
-				add_to_buffer(buff, data->list_of_aliases[x] + y + 1);
+				add_to_buffer(buff, data->alias_list[x] + y + 1);
 				add_to_buffer(buff, "'\n");
 				_print_out(buff);
 			}
@@ -46,15 +46,15 @@ char *fetch_alias(data_of_program *data, char *name)
 	int x, length_of_alias;
 
 	/** check for nulls */
-	if (name == NULL || data->list_of_aliases == NULL)
+	if (name == NULL || data->alias_list == NULL)
 		return (NULL);
 	length_of_alias = string_length(name);
-	for (x = 0; data->list_of_aliases[x]; x++)
+	for (x = 0; data->alias_list[x]; x++)
 	{
-		if (string_compare(name, data->list_of_aliases[x]
-					, length_of_alias) && data->list_of_aliases[x][length_of_alias] == '=')
+		if (string_compare(name, data->alias_list[x]
+					, length_of_alias) && data->alias_list[x][length_of_alias] == '=')
 		{
-			return (data->list_of_aliases[x] + length_of_alias + 1);
+			return (data->alias_list[x] + length_of_alias + 1);
 		}
 	}
 	return (NULL);
@@ -71,7 +71,7 @@ int write_alias(char *string_alias, data_of_program *data)
 	char buff[250] = {'0'}, *temporary = NULL;
 
 	/* check for nulls */
-	if (string_alias == NULL || data->list_of_aliases == NULL)
+	if (string_alias == NULL || data->alias_list == NULL)
 		return (1);
 	for (x = 0; string_alias[x]; x++)
 	{
@@ -83,12 +83,12 @@ int write_alias(char *string_alias, data_of_program *data)
 			break;
 		}
 	}
-	for (y = 0; data->list_of_aliases[y]; y++)
+	for (y = 0; data->alias_list[y]; y++)
 	{
-		if (string_compare(buff, data->list_of_aliases[y]
-					, x) && data->list_of_aliases[y][x] == '=')
+		if (string_compare(buff, data->alias_list[y]
+					, x) && data->alias_list[y][x] == '=')
 		{
-			free(data->list_of_aliases[y]);
+			free(data->alias_list[y]);
 			break;
 		}
 	}
@@ -96,9 +96,9 @@ int write_alias(char *string_alias, data_of_program *data)
 	{
 		add_to_buffer(buff, "=");
 		add_to_buffer(buff, temporary);
-		data->list_of_aliases[y] = duplicate_string(buff);
+		data->alias_list[y] = duplicate_string(buff);
 	}
 	else
-		data->list_of_aliases[y] = duplicate_string(string_alias);
+		data->alias_list[y] = duplicate_string(string_alias);
 	return (0);
 }

@@ -30,14 +30,14 @@ int finding_program(data_of_program *data)
 	int x = 0, r_code = 0;
 	char **dir;
 
-	if (!data->command_names)
+	if (!data->command_name)
 		return (2);
 
-	if (data->command_names[0] == '/' || data->command_names[0] == '.')
-		return (check_files(data->command_names));
+	if (data->command_name[0] == '/' || data->command_name[0] == '.')
+		return (check_files(data->command_name));
 	free(data->tokens[0]);
-	dat->tokens[0] = string_concatenate(duplicate_string("/")
-			, dat->command_names);
+	data->tokens[0] = string_concatenate(duplicate_string("/")
+			, data->command_name);
 	if (!data->tokens[0])
 		return (2);
 	dir = tokenize_paths(data);

@@ -9,10 +9,10 @@ void variables_expansion(data_of_program *data)
 	char lines[BUFFER_SIZE} = {0}, expansions[BUFFER_SIZE] = {'\0'}
 		, *temporary;
 
-	if (data->input_lines == NULL)
+	if (data->input_line == NULL)
 		return;
 
-	add_to_buffer(lines, data->input_lines);
+	add_to_buffer(lines, data->input_line);
 	for (x = 0; lines[x]; x++)
 		if (lines[x] == '#')
 			lines[x--] = '\0';
@@ -21,7 +21,7 @@ void variables_expansion(data_of_program *data)
 			lines[x] = '\0';
 			long_to_str(errNo, expansions, 10);
 			add_to_buffer(lines, expansions);
-			add_to_buffer(lines, data->input_lines + x + 2);
+			add_to_buffer(lines, data->input_line + x + 2);
 		}
 		else if (lines[x] == '$' && (lines[x + 1] == ' ' || lines[x + 1] == '\0'))
 			continue;
@@ -35,10 +35,10 @@ void variables_expansion(data_of_program *data)
 			temporary ? add_to_buffer(lines, temporary) : 1;
 			add_to_buffer(lines, expansions);
 		}
-	if (!string_compare(data->input_lines, lines, 0))
+	if (!string_compare(data->input_line, lines, 0))
 	{
-		free(data->input_lines);
-		data->input_lines = duplicate_string(lines);
+		free(data->input_line);
+		data->input_line = duplicate_string(lines);
 	}
 }
 /**
@@ -51,9 +51,9 @@ void alias_expansion(data_of_program *data)
 	char lines[BUFFER_SIZE] = {0}, expansions[BUFFER_SIZE] = {'\0'}
 		, *temporary;
 
-	if (data->input_lines == NULL)
+	if (data->input_line == NULL)
 		return;
-	add_to_buffer(lines, data->input_lines);
+	add_to_buffer(lines, data->input_line);
 
 	for (x = 0; lines[x]; x++)
 	{
@@ -76,8 +76,8 @@ void alias_expansion(data_of_program *data)
 	}
 	if (expanded)
 	{
-		free(data->input_lines);
-		data->input_lines = duplicate_string(lines);
+		free(data->input_line);
+		data->input_line = duplicate_string(lines);
 	}
 }
 /**

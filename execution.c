@@ -23,14 +23,14 @@ int execution(data_of_program *data)
 		pid = fork();
 		if (pid == -1)
 		{
-			print_error(data->commands_name);
+			print_error(data->command_name);
 			exit(EXIT_FAILURE);
 		}
 		if (pid == 0)
 		{
-			r_value = exec_value(data->tokens[0], datat->tokens, data->environment);
+			r_value = exec_value(data->tokens[0], datat->tokens, data->env);
 			if (r_value == -1)
-				print_error(data->commands_name), exit(EXIT_FAILURE);
+				print_error(data->command_name), exit(EXIT_FAILURE);
 		}
 		else
 		{

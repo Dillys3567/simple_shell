@@ -22,7 +22,7 @@ int _getlines(data_of program * data)
 			array_of_commands[x] = NULL;
 		}
 		/* write to buffer from file descriptor */
-		read_bytes = read(data->descriptor_file, &buffer, BUFFER_SIZE - 1);
+		read_bytes = read(data->file_descriptor, &buffer, BUFFER_SIZE - 1);
 		if (read_bytes == 0)
 		{
 			return (-1);
@@ -35,7 +35,7 @@ int _getlines(data_of program * data)
 		} while (array_of_commands[x++]);
 	}
 
-	data->line_input = array_of_commands[0];
+	data->input_line = array_of_commands[0];
 
 	for (x = 0; array_of_commands[x]; x++)
 	{
@@ -43,7 +43,7 @@ int _getlines(data_of program * data)
 		array_of_operators[x] = array_of_operators[x + 1];
 	}
 
-	return (string_length(data->line_input));
+	return (string_length(data->input_line));
 }
 
 /**
