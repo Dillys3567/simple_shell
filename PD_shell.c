@@ -99,7 +99,7 @@ void sisifo(char *prompt, data_of_program *data)
 	for (data->exec_counter = 1;; ++(data->exec_counter))
 	{
 		_print(prompt);
-		error_code = string_len = _getline(data);
+		error_code = string_len = _getlines(data);
 
 		if (error_code == EOF)
 		{
@@ -108,12 +108,12 @@ void sisifo(char *prompt, data_of_program *data)
 		}
 		if (string_len >= 1)
 		{
-			expand_alias(data);
-			expand_variables(data);
+			alias_expansion(data);
+			variables_expansion(data);
 			tokenize(data);
 			if (data->tokens[0])
 			{
-				error_code = execute(data);
+				error_code = execution(data);
 				if (error_code != 0)
 					_print_error(error_code, data);
 			}

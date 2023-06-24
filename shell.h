@@ -179,4 +179,6 @@ int environment_remove_key(char *key, data_of_program *data);
 
 void print_environment(data_of_program *data);
 
+void tokenize(data_of_program *data);
+
 #endif /* SHELL_H */

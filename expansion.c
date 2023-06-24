@@ -6,7 +6,7 @@
 void variables_expansion(data_of_program *data)
 {
 	int x, y;
-	char lines[BUFFER_SIZE} = {0}, expansions[BUFFER_SIZE] = {'\0'}
+	char lines[BUFFER_SIZE] = {0}, expansions[BUFFER_SIZE] = {'\0'}
 		, *temporary;
 
 	if (data->input_line == NULL)
@@ -19,7 +19,7 @@ void variables_expansion(data_of_program *data)
 		else if (lines[x] == '$' && lines[x + 1] == '?')
 		{
 			lines[x] = '\0';
-			long_to_string(errnNo, expansions, 10);
+			long_to_string(errno, expansions, 10);
 			add_to_buffer(lines, expansions);
 			add_to_buffer(lines, data->input_line + x + 2);
 		}
@@ -31,7 +31,7 @@ void variables_expansion(data_of_program *data)
 				expansions[y - 1] = lines[x + y];
 			temporary = environment_get_key(expansions, data);
 			lines[x] = '\0', expansions[0] = '\0';
-			add_to_buffer(expansions, line + x + y);
+			add_to_buffer(expansions, lines + x + y);
 			temporary ? add_to_buffer(lines, temporary) : 1;
 			add_to_buffer(lines, expansions);
 		}
