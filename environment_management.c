@@ -5,7 +5,7 @@
  * @data: struct of program data
  * Return: pointer to variable or NULL
  */
-char *environment_get_key(char *key, data_of_programs *data)
+char *environment_get_key(char *key, data_of_program *data)
 {
 	int x, length_of_key = 0;
 
@@ -29,7 +29,7 @@ char *environment_get_key(char *key, data_of_programs *data)
  * @data: struct for program data
  * Return: 1 if params are NULL, 2 on error and 0 on success
  */
-int environment_set_key(char *key, char *value, data_of_programs *data)
+int environment_set_key(char *key, char *value, data_of_program *data)
 {
 	int x, length_of_key = 0, new_key = 1;
 
@@ -62,7 +62,7 @@ int environment_set_key(char *key, char *value, data_of_programs *data)
  * @data: struct for program data
  * Return: 1 if removed, 0 if not exist
  */
-int environment_remove_key(char *key, data_of_programs *data)
+int environment_remove_key(char *key, data_of_program *data)
 {
 	int x, length_of_key = 0;
 
@@ -91,7 +91,7 @@ int environment_remove_key(char *key, data_of_programs *data)
  * print_environment - print currrent environment
  * @data: struct for program data
  */
-void print_environment(data_of_programs *data)
+void print_environment(data_of_program *data)
 {
 	int y;
 

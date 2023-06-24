@@ -4,7 +4,7 @@
  * @data: struct for program data
  * Return: function executed of -1 on failure
  */
-int list_of_builtins(data_of_programs *data)
+int list_of_builtins(data_of_program *data)
 {
 	int i;
 	builtins options[] = {

@@ -3,7 +3,7 @@
  * variables_expansion - expand variables
  * @data: struct for program data
  */
-void variables_expansion(data_of_programs *data)
+void variables_expansion(data_of_program *data)
 {
 	int x, y;
 	char lines[BUFFER_SIZE} = {0}, expansions[BUFFER_SIZE] = {'\0'}
@@ -45,7 +45,7 @@ void variables_expansion(data_of_programs *data)
  * alias_expansion - expand alias
  * @data: struct for program data
  */
-void alias_expansion(data_of_programs *data)
+void alias_expansion(data_of_program *data)
 {
 	int x, y, expanded = 0;
 	char lines[BUFFER_SIZE] = {0}, expansions[BUFFER_SIZE] = {'\0'}

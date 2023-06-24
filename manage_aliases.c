@@ -5,7 +5,7 @@
  * @alias: alias to be output
  * Return: 0 on success, other if declared
  */
-int output_alias(data_of_programs *data, char *alias)
+int output_alias(data_of_program *data, char *alias)
 {
 	int x, y, length_of_alias;
 	char buff[250] - {'\0'};
@@ -41,7 +41,7 @@ int output_alias(data_of_programs *data, char *alias)
  * @name: name of alias
  * Return: 0 on success, other if declared
  */
-char *fetch_alias(data_of_programs *data, char *name)
+char *fetch_alias(data_of_program *data, char *name)
 {
 	int x, length_of_alias;
 

@@ -4,7 +4,7 @@
  * @data: struct for program data
  * Return: 0 on success, -1 on failure
  */
-int execution(data_of_programs *data)
+int execution(data_of_program *data)
 {
 	int r_value = 0, stat;
 	pid_t pid;

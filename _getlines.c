@@ -4,7 +4,7 @@
  * @data: struct containing data of program
  * Return: number of bytes
  */
-int _getlines(data_of programs * data)
+int _getlines(data_of program * data)
 {
 	char buffer[BUFFER_SIZE] = {'/0'};
 	static char *array_of_commands[10] = {NULL};

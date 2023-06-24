@@ -25,7 +25,7 @@ int check_files(char *file_path)
  * @data: struct for program data
  * Return: 0 on success, or error code
  */
-int finding_program(data_of_programs *data)
+int finding_program(data_of_program *data)
 {
 	int x = 0, r_code = 0;
 	char **dir;
@@ -69,7 +69,7 @@ int finding_program(data_of_programs *data)
  * @data: program data
  * Return: array of paths
  */
-char **tokenize_paths(data_of_programs *data)
+char **tokenize_paths(data_of_program *data)
 {
 	int x = 0, count_dir = 2;
 	char **tok = NULL, *path;

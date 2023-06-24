@@ -4,7 +4,7 @@
  * @data: struct for program data
  * Return: 0 on success, other if declared
  */
-int exit_builtin(data_of_programs *data)
+int exit_builtin(data_of_program *data)
 {
 	int x;
 
@@ -27,7 +27,7 @@ int exit_builtin(data_of_programs *data)
  * @data: struct for program data
  * Return: 0 on success, other if declared
  */
-int cd_builtin(data_of_programs *data)
+int cd_builtin(data_of_program *data)
 {
 	char *home_directory = environment_get_key
 		("HOME", data), *old_directory = NULL;
@@ -62,7 +62,7 @@ int cd_builtin(data_of_programs *data)
  * @new_dir: path for working dir
  * Return: 0 on success, other if declared
  */
-int set_working_directory(data_of_programs *data, char *new_dir)
+int set_working_directory(data_of_program *data, char *new_dir)
 {
 	char old_directories[128] = {0};
 	int error_code = 0;
@@ -86,7 +86,7 @@ int set_working_directory(data_of_programs *data, char *new_dir)
  * @data: struct for program data
  * Return: 0 on succes, other if declared
  */
-int help_builtin(data_of_programs *data)
+int help_builtin(data_of_program *data)
 {
 	int x, len = 0;
 	char *messages[6] = {NULL};

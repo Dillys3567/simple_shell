@@ -4,7 +4,7 @@
  * @data: struct for program data
  * Return: 0 on success, other if declared
  */
-int builtin_environment(data_of_programs *data)
+int builtin_environment(data_of_program *data)
 {
 	int x;
 	char names[50] = {'\0'}, *var_dup = NULL;
@@ -46,7 +46,7 @@ int builtin_environment(data_of_programs *data)
  * @data: struct for program data
  * Return: 0 on success, other if declared
  */
-int builtin_set_environment(data_of_programs *data)
+int builtin_set_environment(data_of_program *data)
 {
 	if (data->tokens[1] == NULL || data->tokens[2] == NULL)
 		return (0);
