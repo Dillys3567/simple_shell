@@ -14,7 +14,7 @@ int list_of_builtins(data_of_program *data)
 		{"alias", alias_builtin},
 		{"env", builtin_environment},
 		{"setenv", builtin_set_environment},
-		{"unsetenv", builtin_unset_env},
+		{"unsetenv", builtin_unset_environment},
 		{NULL, NULL}
 	};
 	for (i = 0; options[i].builtin != NULL; i++)

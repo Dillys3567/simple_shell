@@ -12,12 +12,12 @@ int check_files(char *file_path)
 	{
 		if (S_ISDIR(s.st_mode) || access(file_path, X_OK))
 		{
-			errNo = 126;
+			errno = 126;
 			return (126);
 		}
 		return (0);
 	}
-	errNo = 127;
+	errno = 127;
 	return (127);
 }
 /**
@@ -36,32 +36,32 @@ int finding_program(data_of_program *data)
 	if (data->command_name[0] == '/' || data->command_name[0] == '.')
 		return (check_files(data->command_name));
 	free(data->tokens[0]);
-	data->tokens[0] = string_concatenate(duplicate_string("/")
+	data->tokens[0] = str_concat(str_duplicate("/")
 			, data->command_name);
 	if (!data->tokens[0])
 		return (2);
-	dir = tokenize_paths(data);
+	dir = tokenize_path(data);
 	if (!dir || !dir[0])
 	{
-		errNo = 127;
+		errno = 127;
 		return (127);
 	}
 	for (x = 0; dir[x]; x++)
 	{
-		dir[x] = string_concatenate(dir[x], data->tokens[0]);
+		dir[x] = str_concat(dir[x], data->tokens[0]);
 		r_code = check_files(dir[x]);
 		if (r_code == 0 || r_code == 126)
 		{
-			errNo = 0;
+			errno = 0;
 			free(data->tokens[0]);
-			data->tokens[0] = duplicate_string(dir[x]);
-			free_array(dir);
+			data->tokens[0] = str_duplicate(dir[x]);
+			free_array_of_pointers(dir);
 			return (r_code);
 		}
 	}
 	free(data->tokens[0]);
 	data->tokens[0] = NULL;
-	free_array(dir);
+	free_array_of_pointers(dir);
 	return (r_code);
 }
 /**
@@ -69,7 +69,7 @@ int finding_program(data_of_program *data)
  * @data: program data
  * Return: array of paths
  */
-char **tokenize_paths(data_of_program *data)
+char **tokenize_path(data_of_program *data)
 {
 	int x = 0, count_dir = 2;
 	char **tok = NULL, *path;
@@ -78,7 +78,7 @@ char **tokenize_paths(data_of_program *data)
 	if ((path == NULL || path[0] == '\0'))
 		return (NULL);
 
-	path = duplicate_string(path);
+	path = str_duplicate(path);
 	for (x = 0; path[x]; x++)
 	{
 		if (path[x] == ':')
@@ -86,10 +86,10 @@ char **tokenize_paths(data_of_program *data)
 	}
 	tok = malloc(sizeof(char *) * count_dir);
 	x = 0;
-	tok[x] = duplicate_string(_stringtokenize(path, ":"));
+	tok[x] = str_duplicate(_strtok(path, ":"));
 	while (tok[x++])
 	{
-		tok[x] = duplicate_string(_stringtokenize(NULL, ":"));
+		tok[x] = str_duplicate(_strtok(NULL, ":"));
 	}
 	free(path);
 	path = NULL;

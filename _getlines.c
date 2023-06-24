@@ -12,8 +12,8 @@ int _getlines(data_of program * data)
 	ssize_t read_bytes, x = 0;
 
 	/* check if command is in array and logical opeartors */
-	if (!array_of_commands[0] || (array_of_operators[0] == '&' && errNo != 0) || (
-				array_of_operators[0] == '|' && errNo == 0))
+	if (!array_of_commands[0] || (array_of_operators[0] == '&' && errno != 0) || (
+				array_of_operators[0] == '|' && errno == 0))
 	{
 		/* free allocated memory if exists */
 		for (x = 0; array_of_commands[x]; x++)
@@ -29,7 +29,7 @@ int _getlines(data_of program * data)
 		}
 		x = 0;
 		do {
-			array_of_commands[x] = duplicate_string(_tokenstr
+			array_of_commands[x] = str_duplicate(_strtok
 					(x ? NULL : buffer, "\n;"));
 			x = check_ops_logic(array_of_commands, x, array_of_operators);
 		} while (array_of_commands[x++]);
@@ -43,7 +43,7 @@ int _getlines(data_of program * data)
 		array_of_operators[x] = array_of_operators[x + 1];
 	}
 
-	return (string_length(data->input_line));
+	return (str_length(data->input_line));
 }
 
 /**
@@ -67,8 +67,8 @@ int check_ops_logic(char *array_of_commands[], int x,
 			/** split line at && */
 			temporary = array_of_commands[x];
 			array_of_commands[x][y] = '\0';
-			array_of_commands[x] = duplicate_string(array_of_commands[x]);
-			array_of_commands[x + 1] = duplicate_string(temporary + y + 2);
+			array_of_commands[x] = str_duplicate(array_of_commands[x]);
+			array_of_commands[x + 1] = str_duplicate(temporary + y + 2);
 			x++;
 			array_of_operators[x] = '&';
 			free(temporary);
@@ -78,8 +78,8 @@ int check_ops_logic(char *array_of_commands[], int x,
 			/* split line at || */
 			temporary = array_of_commands[x];
 			array_of_commands[x][y] = '\0';
-			array_of_commands[x] = duplicate_string(array_of_commands[x]);
-			array_of_commands[x + 1] = duplicate_string(temporary + y + 2);
+			array_of_commands[x] = str_duplicate(array_of_commands[x]);
+			array_of_commands[x + 1] = str_duplicate(temporary + y + 2);
 			x++;
 			array_of_operators[x] = '|';
 			free(temporary);

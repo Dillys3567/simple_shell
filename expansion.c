@@ -19,7 +19,7 @@ void variables_expansion(data_of_program *data)
 		else if (lines[x] == '$' && lines[x + 1] == '?')
 		{
 			lines[x] = '\0';
-			long_to_str(errNo, expansions, 10);
+			long_to_string(errnNo, expansions, 10);
 			add_to_buffer(lines, expansions);
 			add_to_buffer(lines, data->input_line + x + 2);
 		}
@@ -35,10 +35,10 @@ void variables_expansion(data_of_program *data)
 			temporary ? add_to_buffer(lines, temporary) : 1;
 			add_to_buffer(lines, expansions);
 		}
-	if (!string_compare(data->input_line, lines, 0))
+	if (!str_compare(data->input_line, lines, 0))
 	{
 		free(data->input_line);
-		data->input_line = duplicate_string(lines);
+		data->input_line = str_duplicate(lines);
 	}
 }
 /**
@@ -68,7 +68,7 @@ void alias_expansion(data_of_program *data)
 			add_to_buffer(expansions, lines + x + y);
 			lines[x] = '\0';
 			add_to_buffer(lines, temporary);
-			lines[string_length(lines)] = '\0';
+			lines[str_length(lines)] = '\0';
 			add_to_buffer(lines, expansions);
 			expanded = 1;
 		}
@@ -77,7 +77,7 @@ void alias_expansion(data_of_program *data)
 	if (expanded)
 	{
 		free(data->input_line);
-		data->input_line = duplicate_string(lines);
+		data->input_line = str_duplicate(lines);
 	}
 }
 /**
@@ -90,7 +90,7 @@ int add_to_buffer(char *buffer, char *strings)
 {
 	int len, x;
 
-	len = string_length(buffer);
+	len = str_length(buffer);
 	for (x = 0; strings[x]; x++)
 		buffer[len + x] = strings[x];
 	buffer[len + x] = '\0';

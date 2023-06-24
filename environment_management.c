@@ -11,10 +11,10 @@ char *environment_get_key(char *key, data_of_program *data)
 
 	if (key == NULL || data->env == NULL)
 		return (NULL);
-	length_of_key = string_length(key);
+	length_of_key = str_length(key);
 	for (x = 0; data->env[x]; x++)
 	{
-		if (string_compare(key, data->env[x], length_of_key) && data->
+		if (str_compare(key, data->env[x], length_of_key) && data->
 				env[x][length_of_key] == '=')
 		{
 			return (data->env[x] + length_of_key + 1);
@@ -35,11 +35,11 @@ int environment_set_key(char *key, char *value, data_of_program *data)
 
 	if (key == NULL || value == NULL || data->env == NULL)
 		return (1);
-	length_of_key = string_length(key);
+	length_of_key = str_length(key);
 
 	for (x = 0; data->env[x]; x++)
 	{
-		if (string_compare(key, data->env[x], length_of_key) && data->
+		if (str_compare(key, data->env[x], length_of_key) && data->
 				env[x][length_of_key] == '=')
 		{
 			new_key = 0;
@@ -47,8 +47,8 @@ int environment_set_key(char *key, char *value, data_of_program *data)
 			break;
 		}
 	}
-	data->env[x] = string_concatenate(duplicate_string(key), '=');
-	data->env[x] = string_concatenate(data->env[x], value);
+	data->env[x] = str_concat(str_duplicate(key), '=');
+	data->env[x] = str_concat(data->env[x], value);
 
 	if (new_key)
 	{
@@ -68,11 +68,11 @@ int environment_remove_key(char *key, data_of_program *data)
 
 	if (key == NULL || data->env == NULL)
 		return  (0);
-	length_of_key = string_length(key);
+	length_of_key = str_length(key);
 
 	for (x = 0; data->env[x]; x++)
 	{
-		if (string_compare(key, data->env[x], length_of_key) && data
+		if (str_compare(key, data->env[x], length_of_key) && data
 				->env[x][length_of_key] == '=')
 		{
 			free(data->env[x]);

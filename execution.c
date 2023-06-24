@@ -36,9 +36,9 @@ int execution(data_of_program *data)
 		{
 			wait(&stat);
 			if (WIFEXITED(stat))
-				errNo = WEXITSTATUS(stat);
+				errno = WEXITSTATUS(stat);
 			else if (WIFSIGNALED(stat))
-				errNo = 128 + WTERMSIG(stat);
+				errno = 128 + WTERMSIG(stat);
 		}
 	}
 	return (0);

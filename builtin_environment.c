@@ -17,9 +17,9 @@ int builtin_environment(data_of_program *data)
 		{
 			if (data->tokens[1][x] == '=')
 			{
-				var_dup = duplicate_string(environment_get_key(names, data));
+				var_dup = str_duplicate(environment_get_key(names, data));
 				if (var_dup != NULL)
-					environment_set_key(names, data->tokens[1] + x + 1. data);
+					environment_set_key(names, data->tokens[1] + x + 1, data);
 				print_environment(data);
 				if (environment_get_key(names, data) == NULL)
 				{
@@ -35,9 +35,9 @@ int builtin_environment(data_of_program *data)
 			}
 			names[x] = data->tokens[1][x];
 		}
-		errNo = 2;
+		errno = 2;
 		print_error(data->command_name);
-		errNo = 127;
+		errno = 127;
 	}
 	return (0);
 }
@@ -52,7 +52,7 @@ int builtin_set_environment(data_of_program *data)
 		return (0);
 	if (data->tokens[3] != NULL)
 	{
-		errNo = E2BIG;
+		errnNo = E2BIG;
 		print_error(data->command_name);
 		return (5);
 	}
@@ -72,7 +72,7 @@ int builtin_unset_environment(data_of_program *data)
 	}
 	if (data->tokens[2] != NULL)
 	{
-		errNo = E2BIG;
+		errno = E2BIG;
 		print_error(data->command_name);
 		return (5);
 	}

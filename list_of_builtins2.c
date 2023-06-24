@@ -14,13 +14,13 @@ int exit_builtin(data_of_program *data)
 			if ((data->tokens[1][x] < '0' || data->tokens
 					[1][x] > '9') && data->tokens[1][x] != '+')
 			{
-				errNo = 2;
+				errno = 2;
 				return (2);
 			}
-		errNo = _atois(data->tokens[1]);
+		errno = _atoi(data->tokens[1]);
 	}
-	free_data(data);
-	exit(errNo);
+	free_all_data(data);
+	exit(errno);
 }
 /**
  * cd_builtin - change working dir
@@ -36,7 +36,7 @@ int cd_builtin(data_of_program *data)
 
 	if (data->tokens[1])
 	{
-		if (string_compare(data->tokens[1], "-", 0))
+		if (str_compare(data->tokens[1], "-", 0))
 		{
 			old_directory = environment_get_key("OLDPWD", data);
 			if (old_directory)
@@ -68,12 +68,12 @@ int set_working_directory(data_of_program *data, char *new_dir)
 	int error_code = 0;
 
 	get_working_directory(old_directories, 128);
-	if (!string_compare(old_directories, new_dir, 0))
+	if (!str_compare(old_directories, new_dir, 0))
 	{
 		error_code = change_directory(new_dir);
 		if (error_code == -1)
 		{
-			errNo = 2;
+			errno = 2;
 			return (3);
 		}
 		environment_set_key("PWD", new_dir, data);
@@ -91,7 +91,7 @@ int help_builtin(data_of_program *data)
 	int x, len = 0;
 	char *messages[6] = {NULL};
 
-	messages[0] = HELP_MESSAGE;
+	messages[0] = HELP_MSG;
 	if (data->tokens[1] == NULL)
 	{
 		_print(messages[0] + 6);
@@ -99,26 +99,26 @@ int help_builtin(data_of_program *data)
 	}
 	if (data->tokens[2] != NULL)
 	{
-		errNo = E2BIG;
+		errno = E2BIG;
 		print_error(data->command_name);
 		return (5);
 	}
-	messages[1] = HELP_EXIT_MESSAGE;
-	messages[2] = HELP_ENVIRONMENT_MESSAGE;
-	messages[3] = HELP_SETENV_MESSAGE;
-	messages[4] = HELP_UNSETENV_MESSAGE;
-	messages[5] = HELP_CD_MESSAGE;
+	messages[1] = HELP_EXIT_MSG;
+	messages[2] = HELP_ENV_MSG;
+	messages[3] = HELP_SETENV_MSG
+	messages[4] = HELP_UNSETENV_MSG;
+	messages[5] = HELP_CD_MSG;
 
 	for (x = 0; messages[x]; x++)
 	{
-		len = string_length(data->tokens[1]);
-		if (string_compare(data->tokens[1], messages[x], len))
+		len = str_length(data->tokens[1]);
+		if (str_compare(data->tokens[1], messages[x], len))
 		{
 			_print(messages[x] + len + 1);
 			return (1);
 		}
 	}
-	errNo = EINVAL;
+	errno = EINVAL;
 	print_error(data->command_name);
 	return (0);
 }
@@ -135,7 +135,7 @@ int alias_builtin(data_of_program *data)
 		return (output_alias(data, NULL));
 	while (data->tokens[++x])
 	{
-		if (enumerate_characters(data->tokens[x], "="))
+		if (count_characters(data->tokens[x], "="))
 			write_alias(data->tokens[x], data);
 		else
 			output_alias(data, data->tokens[x]);
