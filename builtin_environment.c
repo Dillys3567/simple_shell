@@ -36,7 +36,7 @@ int builtin_environment(data_of_program *data)
 			names[x] = data->tokens[1][x];
 		}
 		errno = 2;
-		print_error(data->command_name);
+		perror(data->command_name);
 		errno = 127;
 	}
 	return (0);
@@ -52,8 +52,8 @@ int builtin_set_environment(data_of_program *data)
 		return (0);
 	if (data->tokens[3] != NULL)
 	{
-		errnNo = E2BIG;
-		print_error(data->command_name);
+		errno = E2BIG;
+		perror(data->command_name);
 		return (5);
 	}
 	environment_set_key(data->tokens[1], data->tokens[2], data);
@@ -73,7 +73,7 @@ int builtin_unset_environment(data_of_program *data)
 	if (data->tokens[2] != NULL)
 	{
 		errno = E2BIG;
-		print_error(data->command_name);
+		perror(data->command_name);
 		return (5);
 	}
 	environment_remove_key(data->tokens[1], data);

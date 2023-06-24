@@ -19,7 +19,7 @@ int list_of_builtins(data_of_program *data)
 	};
 	for (i = 0; options[i].builtin != NULL; i++)
 	{
-		if (string_compare(options[i].builtin, data->command_name, 0))
+		if (str_compare(options[i].builtin, data->command_name, 0))
 		{
 			return (options[i].function(data));
 		}

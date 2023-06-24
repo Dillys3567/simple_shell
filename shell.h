@@ -171,4 +171,12 @@ void sisifo(char *prompt, data_of_program *data);
      /*To separate strings with delimiters*/
 char *_strtok(char *line, char *delim);
 
+char *environment_get_key(char *key, data_of_program *data);
+
+int environment_set_key(char *key, char *value, data_of_program *data);
+
+int environment_remove_key(char *key, data_of_program *data);
+
+void print_environment(data_of_program *data);
+
 #endif /* SHELL_H */

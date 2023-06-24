@@ -40,7 +40,7 @@ int finding_program(data_of_program *data)
 			, data->command_name);
 	if (!data->tokens[0])
 		return (2);
-	dir = tokenize_path(data);
+	dir = tokenize_paths(data);
 	if (!dir || !dir[0])
 	{
 		errno = 127;
@@ -69,7 +69,7 @@ int finding_program(data_of_program *data)
  * @data: program data
  * Return: array of paths
  */
-char **tokenize_path(data_of_program *data)
+char **tokenize_paths(data_of_program *data)
 {
 	int x = 0, count_dir = 2;
 	char **tok = NULL, *path;
@@ -82,7 +82,7 @@ char **tokenize_path(data_of_program *data)
 	for (x = 0; path[x]; x++)
 	{
 		if (path[x] == ':')
-			count_dir;
+			count_dir++;
 	}
 	tok = malloc(sizeof(char *) * count_dir);
 	x = 0;

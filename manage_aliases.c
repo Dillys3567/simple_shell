@@ -8,7 +8,7 @@
 int output_alias(data_of_program *data, char *alias)
 {
 	int x, y, length_of_alias;
-	char buff[250] - {'\0'};
+	char buff[250] = {'\0'};
 
 	if (data->alias_list)
 	{
@@ -48,7 +48,7 @@ char *fetch_alias(data_of_program *data, char *name)
 	/** check for nulls */
 	if (name == NULL || data->alias_list == NULL)
 		return (NULL);
-	length_of_alias = string_length(name);
+	length_of_alias = str_length(name);
 	for (x = 0; data->alias_list[x]; x++)
 	{
 		if (str_compare(name, data->alias_list[x]
@@ -79,7 +79,7 @@ int write_alias(char *string_alias, data_of_program *data)
 			buff[x] = string_alias[x];
 		else
 		{
-			temporary = fetch_alias(data, string_alias + i + 1);
+			temporary = fetch_alias(data, string_alias + x + 1);
 			break;
 		}
 	}

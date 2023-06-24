@@ -51,8 +51,8 @@ int cd_builtin(data_of_program *data)
 	else
 	{
 		if (!old_directory)
-			home_directory = get_working_directory(old_directories, 128);
-		return (set_working_directories(data, home_directory));
+			home_directory = getcwd(old_directories, 128);
+		return (set_working_directory(data, home_directory));
 	}
 	return (0);
 }
@@ -67,10 +67,10 @@ int set_working_directory(data_of_program *data, char *new_dir)
 	char old_directories[128] = {0};
 	int error_code = 0;
 
-	get_working_directory(old_directories, 128);
+	getcwd(old_directories, 128);
 	if (!str_compare(old_directories, new_dir, 0))
 	{
-		error_code = change_directory(new_dir);
+		error_code = chdir(new_dir);
 		if (error_code == -1)
 		{
 			errno = 2;
@@ -100,12 +100,12 @@ int help_builtin(data_of_program *data)
 	if (data->tokens[2] != NULL)
 	{
 		errno = E2BIG;
-		print_error(data->command_name);
+		perror(data->command_name);
 		return (5);
 	}
 	messages[1] = HELP_EXIT_MSG;
 	messages[2] = HELP_ENV_MSG;
-	messages[3] = HELP_SETENV_MSG
+	messages[3] = HELP_SETENV_MSG;
 	messages[4] = HELP_UNSETENV_MSG;
 	messages[5] = HELP_CD_MSG;
 
@@ -119,7 +119,7 @@ int help_builtin(data_of_program *data)
 		}
 	}
 	errno = EINVAL;
-	print_error(data->command_name);
+	perror(data->command_name);
 	return (0);
 }
 /**

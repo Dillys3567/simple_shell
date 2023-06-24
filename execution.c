@@ -9,7 +9,7 @@ int execution(data_of_program *data)
 	int r_value = 0, stat;
 	pid_t pid;
 
-	r_value = lists_of_builtins(data);
+	r_value = list_of_builtins(data);
 	if (r_value != -1)
 		return (r_value);
 
@@ -23,14 +23,14 @@ int execution(data_of_program *data)
 		pid = fork();
 		if (pid == -1)
 		{
-			print_error(data->command_name);
+			perror(data->command_name);
 			exit(EXIT_FAILURE);
 		}
 		if (pid == 0)
 		{
-			r_value = exec_value(data->tokens[0], datat->tokens, data->env);
+			r_value = execve(data->tokens[0], data->tokens, data->env);
 			if (r_value == -1)
-				print_error(data->command_name), exit(EXIT_FAILURE);
+				perror(data->command_name), exit(EXIT_FAILURE);
 		}
 		else
 		{

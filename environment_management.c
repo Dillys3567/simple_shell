@@ -47,7 +47,7 @@ int environment_set_key(char *key, char *value, data_of_program *data)
 			break;
 		}
 	}
-	data->env[x] = str_concat(str_duplicate(key), '=');
+	data->env[x] = str_concat(str_duplicate(key), "=");
 	data->env[x] = str_concat(data->env[x], value);
 
 	if (new_key)
@@ -81,7 +81,7 @@ int environment_remove_key(char *key, data_of_program *data)
 			{
 				data->env[x - 1] = data->env[x];
 			}
-			data->env[x - 1] == NULL;
+			data->env[x - 1] = NULL;
 			return (1);
 		}
 	}

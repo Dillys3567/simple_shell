@@ -4,11 +4,11 @@
  * @data: struct containing data of program
  * Return: number of bytes
  */
-int _getlines(data_of program * data)
+int _getlines(data_of_program * data)
 {
-	char buffer[BUFFER_SIZE] = {'/0'};
+	char buffer[BUFFER_SIZE] = {'\0'};
 	static char *array_of_commands[10] = {NULL};
-	static char array_of_operators[10] = {'/0'};
+	static char array_of_operators[10] = {'\0'};
 	ssize_t read_bytes, x = 0;
 
 	/* check if command is in array and logical opeartors */
@@ -62,7 +62,7 @@ int check_ops_logic(char *array_of_commands[], int x,
 	/* check for & in command */
 	for (y = 0; array_of_commands[x] != NULL && array_of_commands[x][y]; y++)
 	{
-		if (array_of_commands[x][y] == '&' array_of_commands[x][y + 1] == '&')
+		if (array_of_commands[x][y] == '&' && array_of_commands[x][y + 1] == '&')
 		{
 			/** split line at && */
 			temporary = array_of_commands[x];
